@@ -7,7 +7,7 @@ import (
 	"github.com/inancgumus/screen"
 )
 
-func printClock(hour, min, sec int) {
+func printClock(hour, min, sec, splitSec int) {
 	screen.MoveTopLeft()
 	clock := [...]placeholder{
 		digits[hour/10], digits[hour%10],
@@ -15,12 +15,14 @@ func printClock(hour, min, sec int) {
 		digits[min/10], digits[min%10],
 		separator,
 		digits[sec/10], digits[sec%10],
+		dot,
+		digits[splitSec],
 	}
 
 	for line := range clock[0] {
 		for index, digit := range clock {
 			next := clock[index][line]
-			if digit == separator && sec%2 == 0 {
+			if (digit == separator || digit == dot) && sec%2 == 0 {
 				next = "   "
 			}
 			fmt.Print(next, " ")
@@ -44,14 +46,15 @@ func main() {
 	for {
 
 		now := time.Now()
-		hour, min, sec := now.Hour(), now.Minute(), now.Second()
+		hour, min, sec, nano := now.Hour(), now.Minute(), now.Second(), now.Nanosecond()
+		splitSec := nano / 1e8
 
 		if sec%10 == 0 {
 			printAlarm()
 		} else {
-			printClock(hour, min, sec)
+			printClock(hour, min, sec, splitSec)
 		}
-		time.Sleep(time.Second)
-	}
 
+		time.Sleep(time.Millisecond * 100)
+	}
 }
