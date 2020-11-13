@@ -79,7 +79,7 @@ var nine = placeholder{
 	"███",
 }
 
-var digits = [10]placeholder{zero, one, two, three, four, five, six, seven, eight, nine}
+var digits = [...]placeholder{zero, one, two, three, four, five, six, seven, eight, nine}
 
 func main() {
 
@@ -87,11 +87,19 @@ func main() {
 
 	//hour := now.Hour()
 
-	for l := 0; l < 5; l++ {
-		for d := 0; d < 10; d++ {
-			fmt.Printf("%s ", digits[d][l])
+	for _, digit := range digits {
+		for _, line := range digit {
+			fmt.Println(line)
+		}
+		fmt.Println()
+	}
+
+	for line := range digits[0] {
+		for digit := range digits {
+			fmt.Print(digits[digit][line], " ")
 		}
 		fmt.Println()
 	}
 	fmt.Println()
+
 }
