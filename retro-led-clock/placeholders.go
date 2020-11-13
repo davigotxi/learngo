@@ -83,3 +83,11 @@ var separator = placeholder{
 }
 
 var digits = [...]placeholder{zero, one, two, three, four, five, six, seven, eight, nine}
+
+var alarm = [...]string{
+	"   ███  █    ███  ██   █ █   █   ",
+	"   █ █  █    █ █  █ █  ███   █   ",
+	"   ███  █    ███  ██   █ █   █   ",
+	"   █ █  █    █ █  █ █  █ █       ",
+	"   █ █  ███  █ █  █ █  █ █   █   ",
+}
