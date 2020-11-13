@@ -9,14 +9,31 @@ import (
 
 func printClock(hour, min, sec, splitSec int) {
 	screen.MoveTopLeft()
-	clock := [...]placeholder{
-		digits[hour/10], digits[hour%10],
+	clockBuffer := [...]placeholder{
+		blank, blank, blank, blank, blank, blank, blank, blank, blank, blank,
+		digits[hour/10],
+		digits[hour%10],
 		separator,
-		digits[min/10], digits[min%10],
+		digits[min/10],
+		digits[min%10],
 		separator,
-		digits[sec/10], digits[sec%10],
+		digits[sec/10],
+		digits[sec%10],
 		dot,
 		digits[splitSec],
+	}
+	startPosition := sec % 20
+	clock := [...]placeholder{
+		clockBuffer[startPosition%20],
+		clockBuffer[(startPosition+1)%20],
+		clockBuffer[(startPosition+2)%20],
+		clockBuffer[(startPosition+3)%20],
+		clockBuffer[(startPosition+4)%20],
+		clockBuffer[(startPosition+5)%20],
+		clockBuffer[(startPosition+6)%20],
+		clockBuffer[(startPosition+7)%20],
+		clockBuffer[(startPosition+8)%20],
+		clockBuffer[(startPosition+9)%20],
 	}
 
 	for line := range clock[0] {
