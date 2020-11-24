@@ -86,8 +86,6 @@ func main() {
 
 		n := rand.Intn(max(guess1, guess2) + 1)
 
-		//fmt.Printf("turn=%d,n=%d\n", turn, n)
-
 		if n == guess2 || n == guess1 {
 			if turn == 0 {
 				fmt.Println(winBonusMsg)
